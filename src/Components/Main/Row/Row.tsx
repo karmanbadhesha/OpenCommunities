@@ -38,11 +38,15 @@ export default function Row(props) {
 
         <React.Fragment>
             <TableRow className={classes.root}>
-                <TableCell>
-                    <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
-                        {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    </IconButton>
-                </TableCell>
+                {row.homes.length > 0 ?
+                    <TableCell>
+                        <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+                        </IconButton>
+                    </TableCell>
+                    : <TableCell></TableCell>
+                }
+
                 <TableCell component="th">
                     <img src={row.imgUrl} alt={`${row.name} image`} className={classes.img} />
                 </TableCell>
@@ -82,9 +86,9 @@ export default function Row(props) {
                                     ))}
                                     <TableRow>
 
-                                        <TableCell><Typography variant="h6">Average ($)</Typography></TableCell>
+                                        <TableCell><Typography variant="h6">{row.homes.average > 0 ? `Average($)` : null}</Typography></TableCell>
                                         <TableCell></TableCell>
-                                        <TableCell><Typography variant="h6">{row.homes.average}</Typography></TableCell>
+                                        <TableCell><Typography variant="h6">{row.homes.average > 0 ? row.homes.average : null}</Typography></TableCell>
 
                                     </TableRow>
                                 </TableBody>

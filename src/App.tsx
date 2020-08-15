@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
-import { Display, Footer } from './Components';
+import { Display, Footer, Header } from './Components';
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <Display />
       <Footer />
     </div>

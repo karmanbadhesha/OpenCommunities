@@ -20,7 +20,6 @@ import Row from '../Row';
 const useStyles = makeStyles({
     button: {
         margin: '15px',
-
     }
 });
 
@@ -44,7 +43,6 @@ export default function Display() {
                 })
         }
         loadHouses();
-        console.log(communities);
     }, [communities])
 
 
@@ -72,25 +70,35 @@ export default function Display() {
             let copy = [...communities]; //copy old data
             copy[index].homes = matchingRows; //insert matching homes
             copy[index].homes.average = avg; //insert avg price for each community
-            console.log(copy);
             setUpdated(copy);  //replace old data
         });
     }, [homes])
 
     return (
         <React.Fragment>
-            <Button variant="contained" className={classes.button} color="primary" onClick={async () => {
-                const communitiesUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/communities';
-                await axios.get(communitiesUrl)
-                    .then(response => {
-                        setCommunities(response.data);
-                    }).catch(err => {
-                        console.log(err)
-                    })
-            }}>Load data</Button>
-            <Button variant="contained" className={classes.button} color="secondary" onClick={() => {
-                setUpdated([]);
-            }}>Clear</Button>
+            <Button
+                variant="contained"
+                className={classes.button}
+                style={{
+                    backgroundColor: '#009999'
+                }} onClick={async () => {
+                    const communitiesUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/communities';
+                    await axios.get(communitiesUrl)
+                        .then(response => {
+                            setCommunities(response.data);
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                }}>Load data</Button>
+            <Button
+                variant="contained"
+                className={classes.button}
+                style={{
+                    backgroundColor: '#e47b2d'
+                }}
+                onClick={() => {
+                    setUpdated([]);
+                }}>Clear</Button>
             <TableContainer component={Paper}>
                 <Table aria-label="collapsible table">
                     <TableHead>
