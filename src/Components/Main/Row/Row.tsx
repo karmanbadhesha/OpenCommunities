@@ -9,7 +9,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import HouseIcon from '@material-ui/icons/House';
 
@@ -21,7 +20,10 @@ const useRowStyles = makeStyles({
         },
     },
     img: {
-        maxWidth: '300px'
+        maxWidth: '300px',
+        ['@media (max-width:500px)']: { // eslint-disable-line no-useless-computed-key
+            width: '100px'
+        }
     }
 });
 
@@ -39,7 +41,10 @@ export default function Row(props) {
                 {/* only render drop down icon for communities that have houses */}
                 {row.homes.length > 0 ?
                     <TableCell>
-                        <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                        <IconButton aria-label="expand row" size="medium" onClick={() => setOpen(!open)}
+                            style={{
+                                backgroundColor: '#009999'
+                            }} >
                             {open ? <KeyboardArrowUpIcon /> : <HouseIcon />}
                         </IconButton>
                     </TableCell>
@@ -47,12 +52,12 @@ export default function Row(props) {
                 }
 
                 <TableCell component="th">
-                    <img src={row.imgUrl} alt={`${row.name} image`} className={classes.img} />
+                    <img src={row.imgUrl} alt={`${row.name} image`} className={classes.img} onClick={() => setOpen(!open)} />
                 </TableCell>
-                <TableCell component="th">
+                <TableCell component="th" onClick={() => setOpen(!open)}>
                     <Typography variant="h6">{row.name}</Typography>
                 </TableCell>
-                <TableCell>{row.group}</TableCell>
+                <TableCell onClick={() => setOpen(!open)}>{row.group}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

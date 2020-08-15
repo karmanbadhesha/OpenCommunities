@@ -1,18 +1,12 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import Row from '../Row';
@@ -65,7 +59,7 @@ export default function Display() {
                 }
             })
 
-            avg = avg / count;
+            avg = Math.round(avg / count);
             console.log(`AVG for ${community.name} is ${avg}`);
             let copy = [...communities]; //copy old data
             copy[index].homes = matchingRows; //insert matching homes
@@ -81,7 +75,8 @@ export default function Display() {
                 className={classes.button}
                 style={{
                     backgroundColor: '#009999'
-                }} onClick={async () => {
+                }}
+                onClick={async () => {
                     const communitiesUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/communities';
                     await axios.get(communitiesUrl)
                         .then(response => {
