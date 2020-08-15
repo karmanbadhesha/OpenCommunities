@@ -89,11 +89,11 @@ export default function Display() {
 
     return (
         <React.Fragment>
-
+            {/* Error message for network issues */}
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="error">
                     Network issue! Please contact the System Administrator
-        </Alert>
+                </Alert>
             </Snackbar>
 
             <Button
@@ -103,6 +103,7 @@ export default function Display() {
                     backgroundColor: '#009999'
                 }}
                 onClick={async () => {
+                    //make GET request when the user clicks "LOAD DATA"
                     const communitiesUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/communities';
                     await axios.get(communitiesUrl)
                         .then(response => {
@@ -121,6 +122,7 @@ export default function Display() {
                     backgroundColor: '#e47b2d'
                 }}
                 onClick={() => {
+                    //set rows to empty when user clicks CLEAR
                     setUpdated([]);
                 }}>Clear</Button>
             <TableContainer component={Paper}>
@@ -136,6 +138,7 @@ export default function Display() {
                     </TableHead>
                     <TableBody>
                         {updated.map((row) => (
+                            //send row prop to Row which will handle displaying all data
                             <Row key={row.name} row={row} />
                         ))}
                     </TableBody>
