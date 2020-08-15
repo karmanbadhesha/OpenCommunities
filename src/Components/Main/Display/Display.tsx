@@ -43,6 +43,8 @@ export default function Display() {
 
     useEffect(() => {
         //after communities are loaded, fetch all homes
+        loadHouses();
+
         async function loadHouses() {
             const homeUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/homes';
             await axios.get(homeUrl)
@@ -55,7 +57,8 @@ export default function Display() {
                     console.log(err);
                 })
         }
-        loadHouses();
+
+
     }, [communities])
 
 
@@ -84,7 +87,16 @@ export default function Display() {
             copy[index].homes.average = avg; //insert avg price for each community
             setUpdated(copy);  //replace old data
         });
+
     }, [homes])
+
+    useEffect(() => {
+        console.log(updated);
+
+        // updated.sort((a, b) => a.name.localeCompare(b.name));
+        // console.log(updated);
+
+    }, [updated])
 
     return (
         <React.Fragment>
@@ -136,8 +148,8 @@ export default function Display() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {updated.map((row) => (
-                            //send row prop to Row which will handle displaying all data
+                        {updated.sort((a, b) => a.name.localeCompare(b.name)).map((row, index) => (
+                            //send sorted row prop to Row which will handle displaying all data
                             <Row key={row.name} row={row} />
                         ))}
                     </TableBody>

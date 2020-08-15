@@ -32,7 +32,6 @@ export default function Row(props) {
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
 
-
     return (
 
         <React.Fragment>
