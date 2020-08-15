@@ -29,7 +29,6 @@ const useRowStyles = makeStyles({
 
 export default function Row(props) {
     const { row } = props;
-    console.log(row);
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
 
@@ -78,7 +77,7 @@ export default function Row(props) {
                                 <TableBody>
                                     {row.homes.map((home, index) => (
                                         // list each home
-                                        <React.Fragment>
+                                        <React.Fragment key={index}>
                                             <TableRow key={home.id}>
                                                 <TableCell component="th" scope="row">
                                                     {home.type}
@@ -89,7 +88,7 @@ export default function Row(props) {
 
                                         </React.Fragment>
                                     ))}
-                                    <TableRow>
+                                    <TableRow key={row.homes.average}>
                                         {/* average row  */}
                                         <TableCell><Typography variant="h6">{row.homes.average > 0 ? `Average($)` : null}</Typography></TableCell>
                                         <TableCell></TableCell>

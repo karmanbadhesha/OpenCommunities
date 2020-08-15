@@ -79,7 +79,6 @@ export default function Display() {
             })
 
             avg = Math.round(avg / count);
-            console.log(`AVG for ${community.name} is ${avg}`);
             let copy = [...communities]; //copy old data
             copy[index].homes = matchingRows; //insert matching homes
             copy[index].homes.average = avg; //insert avg price for each community
