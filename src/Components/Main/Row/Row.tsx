@@ -35,11 +35,12 @@ export default function Row(props) {
     return (
 
         <React.Fragment>
-            <TableRow className={classes.root} onClick={() => setOpen(!open)}>
+            <TableRow className={classes.root} >
                 {/* only render drop down icon for communities that have houses */}
                 {row.homes.length > 0 ?
                     <TableCell>
                         <IconButton aria-label="expand row" size="medium"
+                            onClick={() => setOpen(!open)}
                             style={{
                                 backgroundColor: '#009999'
                             }} >
