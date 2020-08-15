@@ -10,6 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 import Row from '../Row';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles({
     button: {
@@ -17,12 +19,26 @@ const useStyles = makeStyles({
     }
 });
 
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+
 export default function Display() {
 
     const [communities, setCommunities] = React.useState([]);
     const [homes, setHomes] = React.useState([]);
     const [updated, setUpdated] = React.useState([]);
     const classes = useStyles();
+    const [open, setOpen] = React.useState(false);
+
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
 
     useEffect(() => {
@@ -31,9 +47,12 @@ export default function Display() {
             const homeUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/homes';
             await axios.get(homeUrl)
                 .then(response => {
-                    setHomes(response.data);
+                    if (response.status === 200) {
+                        setHomes(response.data);
+                    }
                 }).catch(err => {
-                    console.log(err)
+                    setOpen(true);
+                    console.log(err);
                 })
         }
         loadHouses();
@@ -70,6 +89,13 @@ export default function Display() {
 
     return (
         <React.Fragment>
+
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error">
+                    Network issue! Please contact the System Administrator
+        </Alert>
+            </Snackbar>
+
             <Button
                 variant="contained"
                 className={classes.button}
@@ -80,9 +106,12 @@ export default function Display() {
                     const communitiesUrl = 'https://a18fda49-215e-47d1-9dc6-c6136a04a33a.mock.pstmn.io/communities';
                     await axios.get(communitiesUrl)
                         .then(response => {
-                            setCommunities(response.data);
+                            if (response.status === 200) {
+                                setCommunities(response.data);
+                            }
                         }).catch(err => {
-                            console.log(err)
+                            setOpen(true);
+                            console.log(err);
                         })
                 }}>Load data</Button>
             <Button

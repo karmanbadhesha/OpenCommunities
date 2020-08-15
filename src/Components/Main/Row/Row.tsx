@@ -37,11 +37,11 @@ export default function Row(props) {
     return (
 
         <React.Fragment>
-            <TableRow className={classes.root}>
+            <TableRow className={classes.root} onClick={() => setOpen(!open)}>
                 {/* only render drop down icon for communities that have houses */}
                 {row.homes.length > 0 ?
                     <TableCell>
-                        <IconButton aria-label="expand row" size="medium" onClick={() => setOpen(!open)}
+                        <IconButton aria-label="expand row" size="medium"
                             style={{
                                 backgroundColor: '#009999'
                             }} >
@@ -52,12 +52,12 @@ export default function Row(props) {
                 }
 
                 <TableCell component="th">
-                    <img src={row.imgUrl} alt={`${row.name} image`} className={classes.img} onClick={() => setOpen(!open)} />
+                    <img src={row.imgUrl} alt={row.name} className={classes.img} />
                 </TableCell>
-                <TableCell component="th" onClick={() => setOpen(!open)}>
+                <TableCell component="th" >
                     <Typography variant="h6">{row.name}</Typography>
                 </TableCell>
-                <TableCell onClick={() => setOpen(!open)}>{row.group}</TableCell>
+                <TableCell >{row.group}</TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
