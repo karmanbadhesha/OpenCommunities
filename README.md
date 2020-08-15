@@ -1,4 +1,5 @@
 Application Installation
+
 The following steps assume installation on a localhost machine for development purposes.
 
 Prerequisites
