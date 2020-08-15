@@ -5,8 +5,7 @@ function Header() {
 
     return (
         <div>
-            <p>Created by Karman Badhesha for OpenHouse.ai - August 14, 2020 </p>
-            <p><a href="https://github.com/karmanbadhesha/OpenCommunities">GitHub</a></p>
+            <img src="https://openhouse.ai/wp-content/uploads/2020/06/cropped-OpenHouse.ai-logo-1-199x66.png" alt="OpenHouse.ai Logo" />
         </div >
     );
 
