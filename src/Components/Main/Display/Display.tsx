@@ -26,9 +26,9 @@ function Alert(props: AlertProps) {
 
 export default function Display() {
 
-    const [communities, setCommunities] = React.useState([]);
-    const [homes, setHomes] = React.useState([]);
-    const [updated, setUpdated] = React.useState([]);
+    const [communities, setCommunities] = React.useState<any[]>([])
+    const [homes, setHomes] = React.useState<any[]>([])
+    const [updated, setUpdated] = React.useState<any[]>([])
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
